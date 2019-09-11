@@ -1,0 +1,1 @@
+testowy projekt dla pipleine openshift
