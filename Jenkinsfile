@@ -74,7 +74,8 @@ pipeline {
         // This places your artifacts into right location inside your S2I image
         // if the S2I image supports it.
         echo "projectName ${env.BUILD} and app_name ${env.APP_NAME}"
-        binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, buildFromPath: "oc-build")
+        //binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, buildFromPath: "oc-build")
+        binaryBuild(projectName: env.BUILD, buildConfigName: "basic-spring-boot-dev/simple-spring", buildFromPath: "oc-build")
       }
     }
 
