@@ -75,26 +75,8 @@ pipeline {
         // if the S2I image supports it.
         echo "projectName ${env.BUILD} and app_name ${env.APP_NAME}"
         //binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, buildFromPath: "oc-build")
-        binaryBuild(projectName: env.BUILD, buildConfigName: "basic-spring-boot-dev/simple-spring", buildFromPath: "oc-build")
+        binaryBuild(projectName: "basic-spring-boot-dev", buildConfigName: "basic-spring-boot-dev/simple-spring", buildFromPath: "oc-build")
       }
     }
-
-    stage('Promote from Build to Dev') {
-      steps {
-        tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.BUILD, toImagePath: env.DEV)
-      }
-    }
-
-    stage ('Verify Deployment to Dev') {
-      steps {
-        verifyDeployment(projectName: env.DEV, targetApp: env.APP_NAME)
-      }
-    }
-
-    stage('Promote from Dev to Stage') {
-      steps {
-        tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.DEV, toImagePath: env.STAGE)
-      }
-    } 
   }
 }
